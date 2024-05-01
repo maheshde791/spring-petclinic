@@ -7,6 +7,9 @@ pipeline {
             }
         }
         stage('Dockerize Application') {
+            agent {
+               label "built-in"
+            }
             steps {
                 sh 'docker build -f dockerfile_app -t app:1 .'
             }
