@@ -8,14 +8,7 @@ pipeline {
       steps {
         sh 'mvn --version'
         sh 'java --version'
-      }
-    }
-    stage('Front-end') {
-      agent {
-        docker { image 'node:16-alpine' }
-      }
-      steps {
-        sh 'node --version'
+        sh './mvnw package'
       }
     }
   }
