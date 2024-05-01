@@ -8,7 +8,9 @@ pipeline {
         }
         stage('Dockerize Application') {
             steps {
-                def projectImage = docker.build("app:1", "--f dockerfile_app .")
+                script {
+                    def projectImage = docker.build("app:1", "--file dockerfile_app .")
+                }
             }
         }
     }
