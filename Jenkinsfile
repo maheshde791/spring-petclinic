@@ -7,11 +7,8 @@ pipeline {
             }
         }
         stage('Dockerize Application') {
-            agent {
-               label "built-in"
-            }
             steps {
-                sh 'docker build -f dockerfile_app -t app:1 .'
+                def projectImage = docker.build("app:1", "--f dockerfile_app .")
             }
         }
     }
