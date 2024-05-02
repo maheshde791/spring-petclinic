@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 # Install necessary packages
 RUN apt-get update && \
-    apt-get install -y wget && \
+    apt-get install -y wget docker.io && \
     apt-get clean
 
 # Download and install Maven 3
@@ -17,3 +17,6 @@ RUN apt-get install -y openjdk-17-jdk
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV MAVEN_HOME=/opt/maven
 ENV PATH=${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}
+
+# Mount Docker socket
+VOLUME /var/run/docker.sock
