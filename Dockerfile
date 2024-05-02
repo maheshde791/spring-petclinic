@@ -18,5 +18,8 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV MAVEN_HOME=/opt/maven
 ENV PATH=${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}
 
+# Set environment variable to enable Docker BuildKit
+ENV DOCKER_BUILDKIT=1
+
 # Mount Docker socket
 VOLUME /var/run/docker.sock
