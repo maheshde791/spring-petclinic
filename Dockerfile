@@ -1,9 +1,17 @@
-FROM ubuntu:latest
-
-# Install necessary packages
+FROM jenkins/agent:latest
+USER root
 RUN apt-get update && \
-    apt-get install -y wget docker.io && \
-    apt-get clean
+    apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io && \
+    usermod -aG docker jenkins
 
 # Download and install Maven 3
 RUN wget -q -O - "https://archive.apache.org/dist/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz" | tar xz -C /opt && \
@@ -18,8 +26,4 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV MAVEN_HOME=/opt/maven
 ENV PATH=${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}
 
-# Set environment variable to enable Docker BuildKit
-ENV DOCKER_BUILDKIT=1
-
-# Mount Docker socket
-VOLUME /var/run/docker.sock
+USER jenkins
