@@ -8,9 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                //sh 'mvn clean package -Dcheckstyle.skip=true'
-                sh 'mkdir target'
-                sh 'touch target/spring-petclinic-1.0-SNAPSHOT.jar'
+                sh 'mvn clean package -Dcheckstyle.skip=true'
             }
         }
         stage('Dockerize Application') {
