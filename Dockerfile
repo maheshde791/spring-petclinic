@@ -27,8 +27,5 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV MAVEN_HOME=/opt/maven
 ENV PATH=${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}
 
-# Define the volume to mount the Docker socket
-VOLUME /var/run/docker.sock
-
 USER jenkins
 
