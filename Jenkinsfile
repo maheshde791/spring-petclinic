@@ -26,6 +26,7 @@ pipeline {
         stage('Push Image') {
             environment {
                     DOCKERHUB_CREDENTIALS = credentials('maheshde791_dockerhub_cred')
+                    HOME = "${env.WORKSPACE}"
             }
             steps {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
